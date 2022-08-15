@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+<!-- -------------------------------- title -------------------------------- -->
+{% block title %} {{ TITLE }} {% endblock %}
+
+<!-- ------------------------------- header -------------------------------- -->
+{% block header %}
+<h2 class="page-header">| Huawei OCR Live Preview |</h2>
+{% endblock %}
+<!-- ------------------------------ contents ------------------------------- -->
+{% block content %}
+
+<div id="contents">
+    <!-- INSTRUCTIONS  -->
+    <div class="alert alert-secondary alert-dismissible fade show" role="alert"  style="margin-bottom: 5px;">
+        <strong>Live Preview Mode </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+	<!-- ------------------------------ MAIN FLEX ------------------------------ -->
+	<div id="flex-content">
+		<!-- --------------------------- left flex item ---------------------------- -->
+		<div id="detection-container">
+			<img id="videoElement" src="{{ url_for('video_feed') }}" />
+			<div class="loadingio-spinner-double-ring-sfzcndobthj"><div class="ldio-9310di41lm">
+			<div></div>
+			<div></div>
+			<div><div></div></div>
+			<div><div></div></div>
+			</div></div>
+		</div>
+
+	<!-- --------------------------- right flex item --------------------------- -->
+		<div id="flex-inner-content">
+			<!-- ---------------------------- top flex item ---------------------------- -->
+			<div id="flex-item-1">
+				<!-- Control | Gate Status -->
+				<div class="card text-white bg-dark mb-3" style="width: 100%;height: 100%;">
+					<div class="card-header" style="text-align: center;">
+						Control | Gate Status
+					</div>
+
+					<div class="card-body">
+
+						<div id="flex-card"> 
+							<div id="flex-card-item">
+								<div id="flex-card-column">
+
+									<div id="flex-card-item-column-photo">
+										<img id="image-icon" src="static/img/gate.png" alt="gate">
+									</div>
+
+									<div id="flex-card-item-column-content">
+										<div id = "gate-status-container">
+											<div class="spinner-border text-light" role="status">
+												<span class="sr-only"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div id="flex-card-item">
+								<div id="flex-card-column">
+									<div id="flex-card-item-column-photo">
+										<img id="image-icon" src="static/img/com_vis_2.png" alt="gate">
+									</div>
+
+									<div id="flex-card-item-column-content">
+										<div id="controller-container">
+											<form id="control">
+												<!-- Toggle Detection: -->
+												<span class="toggle-switch" data-toggle="tooltip" data-placement="top" title="Click To Toggle Detection and Verification">
+													<span class="toggle-knob"></span>
+												</span>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- -------------------------- bottom flex item --------------------------- -->
+			<div id="flex-item-2">
+				<div class="card text-white bg-dark mb-3" style="width: 100%;height: 100%;">
+					<div class="card-header" style="text-align: center;">
+						Detected Plate & Owner Information
+					</div>
+					<div class="card-body">
+
+						<div id="flex-card"> 
+							<div id="flex-card-item">
+								<div id="flex-card-column">
+
+									<div id="flex-card-item-column-photo">
+										<img id="image-icon" src="static/img/plate.png" alt="gate">
+									</div>
+
+									<div id="flex-card-item-column-content">
+										<!-- TEXT MUST BE CAPS BECAUSE OF FONT STYLE -->
+										<div id="dynamic_plate"> 
+											{{PLATE}}
+											<div class="spinner-border text-light" role="status">
+												<span class="sr-only"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div id="flex-card-item">
+								<div id="flex-card-column">
+
+									<div id="flex-card-item-column-photo">
+										<img id="image-icon" src="static/img/man.png" alt="gate">
+									</div>
+
+									<div id="flex-card-item-column-content">
+										<div id="dynamic_owner"> 
+											<div class="spinner-border text-light" role="status">
+												<span class="sr-only"></span>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ------------------------- TOAST NOTIFICATION -------------------------- -->
+<div class="toast bg-success" id="EpicToast" role="alert" aria-live="assertive" aria-atomic="true" style="position: absolute; top: 85%; right: 20px;">
+	<div class="toast-header">
+		<img src="static/img/toast-icon.png"   
+		alt="..."
+		style="width: 10%; height:100%; margin-right: 10px;"
+		>
+		<strong class="mr-auto"> | Entry Log Created | </strong>
+		
+	</div>
+	
+	<div class="toast-body" id="toast-body-content">
+		<div>
+			<span> New log for plate <span id="toast_plate"></span> at <span id="toast_date"></span>
+		</div>
+	</div>
+</div>
+<footer>
+	<p><strong>Live Preview Mode </strong> <br>If there any problem please contact us :  <br><strong>Phone </strong>: +21694076492 |<strong>Email </strong>: <a href="yahyahajlaoui99@gmail.com">yahyahajlaoui99@gmail.com</a></br> Copyright © 2022, All Right Reserved , made by Huawei</p>
+	
+  </footer>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> 
+<script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}
